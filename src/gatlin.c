@@ -17,8 +17,8 @@ void __start(int core_id, int num_crashes, unsigned char payload) {
     }
   } else {
     //invoke into cache
-    char[4] ct = {payload, payload, payload, payload};
-    int it = *(int *)a;
+    char ct[4] = {payload, payload, payload, payload};
+    int it = *(int *)ct;
     int it2 = it; //what if they overwrote this value to their payload value
     printf("char payload : %c", payload);
     int *ptr = (int *)HOME_DATA_SEGMENT + ((HOME_DATA_SIZE/4)/3 * core_id);
