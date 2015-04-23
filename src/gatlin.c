@@ -6,8 +6,6 @@
  */
 void __start(int core_id, int num_crashes, unsigned char payload) {
 
-  char *ptr = (char *)HOME_DATA_SEGMENT + (HOME_DATA_SIZE/4 * core_id);
-
   if (core_id == 3) {
     while (1) {
       int i;
@@ -18,13 +16,16 @@ void __start(int core_id, int num_crashes, unsigned char payload) {
       }
     }
   } else {
-    unsigned char *ptr = HOME_DATA_SEGMENT; // start on even cache line
-
-    char *ptr = (char *)HOME_DATA_SEGMENT + (rand() % HOME_DATA_SIZE);
-
+    //invoke into cache
+    char[4] ct = {payload, payload, payload, payload};
+    int it = *(int *)a;
+    int it2 = it; //what if they overwrote this value to their payload value
+    printf("char payload : %c", payload);
+    int *ptr = (int *)HOME_DATA_SEGMENT + ((HOME_DATA_SIZE/4)/3 * core_id);
 
     int i = 0;
     while (1) {
-      ptr[i++] = payload;
+      
+      ptr[i++] = (int) it;
     }
 }
