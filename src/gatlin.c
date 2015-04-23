@@ -1,8 +1,6 @@
 #include "lordofthecache.h"
 
-/* Greedy Bot. Fills its own half of memory using cores 0 and 1,
- * and fills the opponent's half using cores 2 and 3.
- * Uses a simple loop with a random start address.
+/* Gatlin Bot
  */
 void __start(int core_id, int num_crashes, unsigned char payload) {
 
