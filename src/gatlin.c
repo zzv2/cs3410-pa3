@@ -6,15 +6,25 @@
  */
 void __start(int core_id, int num_crashes, unsigned char payload) {
 
-  char *ptr = (char *)HOME_DATA_SEGMENT + (rand() % HOME_DATA_SIZE);
+  char *ptr = (char *)HOME_DATA_SEGMENT + (HOME_DATA_SIZE/4 * core_id);
 
-  /*if (core_id >= 2) {
-    ptr += HIMEM;  // move pointer to opponent's half of memory
-    Equip_Ring();
-  }*/
+  if (core_id == 3) {
+    while (1) {
+      int i;
+      for (i = 0; i < TAUNT_SIZE; i++) {
+        if (HOME_STATUS->taunt[i] >= 0) {
+        Eye_Of_Sauron(HOME_STATUS->taunt[i]);
+        }
+      }
+    }
+  } else {
+    unsigned char *ptr = HOME_DATA_SEGMENT; // start on even cache line
 
-  int i = 0;
-  while (1) {
-    ptr[i++] = payload;
-  }
+    char *ptr = (char *)HOME_DATA_SEGMENT + (rand() % HOME_DATA_SIZE);
+
+
+    int i = 0;
+    while (1) {
+      ptr[i++] = payload;
+    }
 }
