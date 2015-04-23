@@ -35,6 +35,7 @@ FLAGS_fbi = -O3
 FLAGS_greedy = -O3
 FLAGS_taunter = -O3
 FLAGS_titfortat = -O3
+FLAGS_gatlin = -O3
 
 #
 # You probably will not need to modify anything below here
